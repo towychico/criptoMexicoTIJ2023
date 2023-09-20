@@ -1,0 +1,8 @@
+{
+  "appId": "app.serenium.serenium",
+  "appName": "Serenium",
+  "webDir": "build",
+  "server": {
+    "androidScheme": "https"
+  }
+}
