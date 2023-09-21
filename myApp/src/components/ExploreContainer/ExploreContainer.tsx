@@ -1,5 +1,5 @@
 import './ExploreContainer.css';
-import Post from './Post.jsx';
+import Post from '../Post/Post';
 
 
 import React from 'react';

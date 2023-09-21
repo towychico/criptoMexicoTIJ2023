@@ -1,6 +1,7 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import {IonContent, IonHeader, IonItem, IonPage, IonTitle, IonToolbar} from '@ionic/react';
+import ExploreContainer from '../../components/ExploreContainer/ExploreContainer';
 import './Home.css';
+import NewPostBtn from "../../components/NewPostBtn/NewPostBtn";
 
 const Home: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <ExploreContainer />
+          <NewPostBtn/>
       </IonContent>
     </IonPage>
   );
