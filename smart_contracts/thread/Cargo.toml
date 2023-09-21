@@ -1,0 +1,20 @@
+[package]
+name = "thread"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+gstd = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47", features = ["debug"] }
+gmeta = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47" }
+parity-scale-codec = { version = "3", default-features = false }
+scale-info = { version = "2", default-features = false }
+thread-io = { path = "io" }
+
+[build-dependencies]
+gear-wasm-builder = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47", features = ["wasm-opt"] }
+thread-io = { path = "io" }
+
+[dev-dependencies]
+gtest = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47" }
