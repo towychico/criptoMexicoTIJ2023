@@ -20,7 +20,8 @@ extern "C" fn handle() {
             .expect("The contract is not initialized")
     };
     match action {
-        ThreadAction::EndThread => thread.end_thread()
+        ThreadAction::EndThread => thread.end_thread(),
+        ThreadAction::AddReply => thread.add_reply()
     }
 }
 
@@ -31,19 +32,20 @@ extern "C" fn init() {
     let thread = Thread {
         id: init_config.id,
         owner: init_config.owner,
-        post_type: init_config.post_type,
+        thread_type: init_config.thread_type,
         content: init_config.content,
-        replies: init_config.replies,
+        replies: Vec::new(),
         state: ThreadState::Active
     };
     unsafe { THREAD = Some(thread) };
+    // transfer x tokens to admin
+
 }
 
 #[no_mangle]
 extern "C" fn state() {
     let state: &mut Thread =
         state_mut();
-
     msg::reply(state, 0).expect("failed to encode or reply from `state()`");
 }
 

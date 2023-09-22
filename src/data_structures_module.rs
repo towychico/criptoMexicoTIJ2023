@@ -6,13 +6,10 @@ pub struct Post{
     pub number_of_saves: u64,
     pub post_id:String,
     pub post_number:u64
-
-
 }
 
 pub struct Stack{
     pub stack:Vec<int>
-
 }
 
 impl Stack {
@@ -31,7 +28,6 @@ impl Stack {
 
     }
     pub fn peek(&mut self) ->Option<&T>{
-
         let last_element:Option<&T> = self.stack.last();
         return last_element;
 

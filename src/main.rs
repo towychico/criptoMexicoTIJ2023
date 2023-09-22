@@ -1,4 +1,7 @@
 pub mod data_structures_module;
+mod test_graph;
+mod models;
+
 use crate::data_structures_module::Post;
 fn main() {
 
