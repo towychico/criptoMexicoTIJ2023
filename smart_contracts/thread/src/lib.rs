@@ -21,7 +21,8 @@ extern "C" fn handle() {
     };
     match action {
         ThreadAction::EndThread => thread.end_thread(),
-        ThreadAction::AddReply => thread.add_reply()
+        ThreadAction::AddReply(post) => thread.add_reply(post),
+        ThreadAction::LikeReply(post_id) => thread.like_reply(post_id)
     }
 }
 
@@ -35,11 +36,11 @@ extern "C" fn init() {
         thread_type: init_config.thread_type,
         content: init_config.content,
         replies: Vec::new(),
-        state: ThreadState::Active
+        state: ThreadState::Active,
+        distributed_tokens: 1 // consider token transferred for creating the post.
     };
     unsafe { THREAD = Some(thread) };
-    // transfer x tokens to admin
-
+    // TODO transfer 1 token to admin ?
 }
 
 #[no_mangle]

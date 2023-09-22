@@ -1,25 +1,25 @@
-use post_io::{InitPost, PostAction};
+use std::string::ToString;
 use gstd::ActorId;
 use gtest::{Program, System};
+use thread_io::{InitThread, ThreadType};
 
-const USER: u128 = 100;
-const LIKES: u128 = 0;
-const ID: u128 = 1;
-const CONTENT: &str = "ALOOO";
+const ID: u128 = 100;
+const OWNER: u128 = 100; // Change later to ActorID
+const THREAD_TYPE: ThreadType = ThreadType::Challenge;
+const CONTENT: &str = "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...";
 
 #[test]
-fn handle() {
+fn init() {
     let sys = System::new();
     sys.init_logger();
-    let post = Program::current(&sys);
-    let res = post.send(2,
-    InitPost {
+    let thread = Program::current(&sys);
+    let res = thread.send(2,
+    InitThread {
         id: ID,
-        poster: USER,
-        likes: LIKES,
-        content: CONTENT
+        owner: OWNER,
+        thread_type: THREAD_TYPE,
+        content: CONTENT.parse().unwrap()
     }
     );
     assert!(!res.main_failed());
-    post.send(2, PostAction::Like);
 }
