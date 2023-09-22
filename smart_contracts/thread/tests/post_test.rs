@@ -1,7 +1,7 @@
 use std::string::ToString;
 use gstd::ActorId;
 use gtest::{Program, System};
-use thread_io::{InitThread, ThreadType};
+use thread_io::{InitThread, ThreadAction, ThreadType};
 
 const ID: u128 = 100;
 const OWNER: u128 = 100; // Change later to ActorID
@@ -21,5 +21,14 @@ fn init() {
         content: CONTENT.parse().unwrap()
     }
     );
+    assert!(!res.main_failed());
+}
+
+#[test]
+fn handle() {
+    let sys = System::new();
+    sys.init_logger();
+    let thread = Program::current(&sys);
+    let res = thread.send(2, ThreadAction::EndThread);
     assert!(!res.main_failed());
 }

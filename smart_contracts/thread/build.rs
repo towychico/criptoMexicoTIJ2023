@@ -1,3 +1,7 @@
-fn main() {
-    gear_wasm_builder::build_with_metadata::<thread_io::ContractMetadata>();
+use thread_io::ContractMetadata;
+use gear_wasm_builder::WasmBuilder;
+use gmeta::Metadata;
+
+fn main(){
+    WasmBuilder::with_meta(ContractMetadata::repr()).exclude_features(vec!["binary-vendor"]).build();
 }

@@ -1,15 +1,14 @@
 #![no_std]
-use gstd::{prelude::*};
+use gstd::{ActorId, prelude::*};
 use gmeta::{InOut,Metadata};
 
 #[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Clone, Debug)]
-pub struct Post {
+pub struct Reply {
     pub post_id: String,
-    pub user_name: String,
+    pub post_owner: ActorId,
+    pub content: String,
     pub number_of_likes: u64,
     pub number_of_reports: u64,
-    pub number_of_saves: u64,
-    pub post_number: u64,
 }
 
 #[derive(Encode, Decode, TypeInfo)]
@@ -26,7 +25,7 @@ pub struct Thread {
     pub owner: u128, // Change later to ActorID
     pub thread_type: ThreadType,
     pub content: String,
-    pub replies: Vec<Post>, // Cambiar a Graph<Post>
+    pub replies: Vec<Reply>, // Cambiar a Graph<Post>
     pub state: ThreadState,
     pub distributed_tokens: u128
 }
@@ -46,9 +45,8 @@ pub enum ThreadState {
 #[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Clone, Debug)]
 pub enum ThreadAction {
     EndThread,
-    AddReply(Post),
+    AddReply(Reply),
     LikeReply(String)
-
 }
 
 #[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Clone, Debug)]
@@ -63,7 +61,7 @@ pub struct ContractMetadata;
 impl Metadata for ContractMetadata {
     type Init = ();
     type Handle = InOut<ThreadAction,ThreadEvent>;
-    type Reply= ();
+    type Reply = ();
     type Others = ();
     type Signal = ();
     type State = Thread;
@@ -88,9 +86,33 @@ impl TokensToDistribute {
         self.tokens_for_each_winner_route = ((total_tokens as f64) * 0.4) / (n_winners_route as f64);
         self.tokens_for_each_top = ((total_tokens as f64) * 0.2) / (n_top as f64);
     }
-    pub fn transfer_tokens(&mut self) {
+    pub async fn transfer_tokens(&mut self, winner_id: ActorId, winner_path: Vec<ActorId>, top_posters: Vec<ActorId>) {
         // TODO transfer 40% of distributed tokens to winner ?
-        // msg.send(program_id, transfer,
+        /*
+        await msg.send(program_id, FTAction::Transfer {
+            from: admin_id
+            to: winner_id
+            amount: self.tokens_for_winner
+        }
+         */
+        for actor in winner_path {
+            /*
+            await msg.send(program_id, FTAction::Transfer {
+                from: admin_id
+                to: actor
+                amount: self.tokens_for_each_winner_route
+            }
+             */
+        }
+        for actor in top_posters {
+            /*
+            await msg.send(program_id, FTAction::Transfer {
+                from: admin_id
+                to: actor
+                amount: self.tokens_for_each_winner_route
+            }
+             */
+        }
     }
 }
 
@@ -98,7 +120,6 @@ impl Thread {
     pub fn end_thread(&mut self) {
         self.state = ThreadState::Expired;
         // distribute tokens: 40% to absolute winner, 40% to path, and 20% to the rest of top n posts.
-
         let tokens_to_distribute: TokensToDistribute = TokensToDistribute::new();
 
         // let winner: ActorId = get_winner();
@@ -106,11 +127,18 @@ impl Thread {
         // let top_posters: Vec<ActorId> = get_top_posters(); ?
 
         // tokens_to_distribute.calculate_tokens_to_distribute(self.distributed_tokens, winner_path.len(), top_posters.len())
+        // tokens_to_distribute.transfer_tokens(winner, winner_path, top_posters);
     }
-    pub fn add_reply(&mut self, post: Post) {
-        self.replies.push(post);
+    pub fn add_reply(&mut self, reply: Reply) {
+        self.replies.push(reply);
         // TODO transfer x token to admin or escrow ?
-
+        /*
+        await msg.send(program_id, FTAction::Transfer {
+            from: owner_reply
+            to: admin_id
+            amount: 1
+        }
+         */
         self.distributed_tokens += 1;
     }
     pub fn like_reply(&mut self, post_id: String) {
@@ -119,7 +147,13 @@ impl Thread {
         // increment their number of likes
         // reply.number_of_likes += 1;
         // TODO transfer x token to admin or escrow ?
-
+        /*
+        await msg.send(program_id, FTAction::Transfer {
+            from: owner_reply
+            to: admin_id
+            amount: 1
+        }
+         */
         self.distributed_tokens += 1;
     }
 }

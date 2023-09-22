@@ -14,6 +14,7 @@ thread-io = { path = "io" }
 
 [build-dependencies]
 gear-wasm-builder = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47", features = ["wasm-opt"] }
+gmeta = { git = "https://github.com/gear-tech/gear.git", rev = "946ac47" }
 thread-io = { path = "io" }
 
 [dev-dependencies]
