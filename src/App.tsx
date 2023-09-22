@@ -16,7 +16,7 @@ function Component() {
   return (
     <>
       <Header isAccountVisible={isAccountReady} />
-        <IonButton>Code sex and crypto</IonButton>
+      
       <main>{isAppReady ? <Routing /> : <ApiLoader />}</main>
       
     </>

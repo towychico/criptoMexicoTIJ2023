@@ -1,6 +1,6 @@
 
 import { Account } from './account';
-import styles from './Header.module.scss';
+import "./Header.css"
 
 type Props = {
   isAccountVisible: boolean;
@@ -8,9 +8,12 @@ type Props = {
 
 function Header({ isAccountVisible }: Props) {
   return (
-    <header className={styles.header}>
-      <h1>Logo</h1>
+    <header className='headerContainer'>
+
       {isAccountVisible && <Account />}
+      <div className="logoTextSerenium" />
+ {/*        eslint-disable-next-line react/button-has-type */}
+        <button className="dropdownButtonMenu" type="button"> </button>
     </header>
   );
 }

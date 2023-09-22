@@ -1,0 +1,12 @@
+
+
+.homeScreen{
+    margin-top: 8vh;
+    width: 100vw;
+    height: 100vh;
+    background-color: #121212;
+    color: white;
+    display: flex;
+    justify-content: center;
+    overflow: scroll;
+}
