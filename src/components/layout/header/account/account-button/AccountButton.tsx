@@ -14,7 +14,7 @@ function AccountButton({ address, name, onClick, isActive, block }: Props) {
   
 
   return (
-    <button className='boton-ovalado' type="button" onClick={onClick}>
+    <button className='accountButtonPol' type="button" onClick={onClick}>
       <Identicon value={address} className={buttonStyles.icon} theme="polkadot" size={28} />
       {name}
     </button>
