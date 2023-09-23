@@ -18,8 +18,6 @@ Unleash the potential of social media with Serenium, the *next generation social
 
 Become a part of the movement. Dive into the heart of Serenium's codebase and witness the future of social media unfold before your eyes. 🌐💬✨
 
-*[Explore the Code](https://github.com/your-username/serenium)*
-
 🚀 Serenium: Where social connections flourish, ideas go viral, and the future of social media begins! 🌟🌼🌐
 
 Join us today, and together, let's redefine social interactions! 👥💬🌐
