@@ -1,7 +1,7 @@
 #![no_std]
 
-use thread_io::{InitThread, Thread, ThreadAction, ThreadState};
-use gstd::{ msg, prelude::*};
+use thread_io::{FTAction, InitThread, Thread, ThreadAction, ThreadState};
+use gstd::{ActorId, msg, prelude::*};
 
 static mut THREAD:Option<Thread> = None;
 
@@ -28,6 +28,10 @@ extern "C" fn handle() {
 
 #[no_mangle]
 extern "C" fn init() {
+    let ADMIN_ID_ADDRESS: &str = "0xdc2c68689fa7c7c808105c0a12b26b976dd9ea031e4389da864938b00e0b7f16";
+    let ADMIN_ID_ACTORID: ActorId = ActorId::from_bs58(ADMIN_ID_ADDRESS.to_string()).expect("Actor ID not retrieved");
+    let FT_PROGRAM_ID: &str = "0x670ac04961801362465fefc9a65745bfdc6119f597d378a1e19fc5696abba058";
+    let FT_PROGRAM_ACTORID: ActorId = ActorId::from_bs58(FT_PROGRAM_ID.to_string()).expect("Actor ID not retrieved");
     let init_config: InitThread = msg::load()
         .expect("Error in decoding `InitThread`");
     let thread = Thread {
@@ -40,15 +44,12 @@ extern "C" fn init() {
         distributed_tokens: 1 // consider token transferred for creating the post.
     };
     unsafe { THREAD = Some(thread) };
-    // TODO transfer 1 token to admin ?
-    // TODO transfer x token to admin or escrow ?
-    /*
-    msg.send(program_id, FTAction::Transfer {
+    // transfer 1 token to admin
+    msg::send(FT_PROGRAM_ACTORID, FTAction::Transfer {
         from: msg::source(),
-        to: admin_id,
+        to: ADMIN_ID_ACTORID,
         amount: 1
-    }
-    */
+    }, 0).expect("Transfer not completed");
 }
 
 #[no_mangle]
