@@ -41,6 +41,14 @@ extern "C" fn init() {
     };
     unsafe { THREAD = Some(thread) };
     // TODO transfer 1 token to admin ?
+    // TODO transfer x token to admin or escrow ?
+    /*
+    msg.send(program_id, FTAction::Transfer {
+        from: msg::source(),
+        to: admin_id,
+        amount: 1
+    }
+    */
 }
 
 #[no_mangle]

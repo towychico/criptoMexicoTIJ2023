@@ -14,7 +14,7 @@ pub struct Reply {
 #[derive(Encode, Decode, TypeInfo)]
 pub struct InitThread {
     pub id: u128,
-    pub owner: u128, // Change later to ActorID
+    pub owner: ActorId, // Change later to ActorID
     pub thread_type: ThreadType,
     pub content: String
 }
@@ -22,7 +22,7 @@ pub struct InitThread {
 #[derive(Encode, Decode, TypeInfo)]
 pub struct Thread {
     pub id: u128,
-    pub owner: u128, // Change later to ActorID
+    pub owner: ActorId, // Change later to ActorID
     pub thread_type: ThreadType,
     pub content: String,
     pub replies: Vec<Reply>, // Cambiar a Graph<Post>
@@ -133,12 +133,12 @@ impl Thread {
         self.replies.push(reply);
         // TODO transfer x token to admin or escrow ?
         /*
-        await msg.send(program_id, FTAction::Transfer {
-            from: owner_reply
-            to: admin_id
+        msg.send(program_id, FTAction::Transfer {
+            from: owner_reply,
+            to: admin_id,
             amount: 1
         }
-         */
+        */
         // self.distributed_tokens += 1;
     }
     pub fn like_reply(&mut self, post_id: String) {
