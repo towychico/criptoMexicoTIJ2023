@@ -14,7 +14,7 @@ pub struct Reply {
 #[derive(Encode, Decode, TypeInfo)]
 pub struct InitThread {
     pub id: u128,
-    pub owner: ActorId, // Change later to ActorID
+    pub owner: ActorId,
     pub thread_type: ThreadType,
     pub content: String
 }

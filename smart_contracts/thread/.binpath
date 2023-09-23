@@ -1,1 +1,1 @@
-target/wasm32-unknown-unknown/release/thread
+target/wasm32-unknown-unknown/debug/thread
