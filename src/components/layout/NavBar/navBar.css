@@ -1,0 +1,32 @@
+.navBar{
+    width: 100vw;
+    height: 7.5vh;
+    position: fixed;
+    bottom: 0;
+    background-color: #080808;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.navBarButton{
+    width: 5vh;
+    height: 5vh;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+}
+#navBtn1{
+    background-image: urL("./../../../assets/images/icons/navBtn1.svg");
+}
+#navBtn2{
+    background-image: urL("./../../../assets/images/icons/navBtn2.svg");
+}#navBtn3{
+    background-image: urL("./../../../assets/images/icons/navBtn3.svg");
+}#navBtn4{
+    background-image: urL("./../../../assets/images/icons/navBtn4.svg");
+}#navBtn5{
+    background-image: urL("./../../../assets/images/icons/navBtn5.svg");
+}

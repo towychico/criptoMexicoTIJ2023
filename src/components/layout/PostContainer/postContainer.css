@@ -1,0 +1,11 @@
+.postContainer{
+    margin-top: 2vh;
+    width: 100vw;
+    height: 100vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5vh;
+    align-items: center;
+
+
+}

@@ -1,0 +1,58 @@
+.customAlert{
+    width: 70vw;
+    height: 45vh;
+    position: fixed;
+    border-radius: 8%;
+    top:25%;
+    background-color: #1E1E1E;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+}
+.customAlertContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5vw;
+    color: white;
+    width: 80%;
+    height: 100%;
+}
+
+.customAlertContent h2{
+    font-family: 'Japandi',sans-serif;
+    text-align: center;
+    font-size: 10vw;
+
+}
+.customAlertContent input{
+    font-family: 'Japandi',sans-serif;
+
+    font-size: 5vw;
+    color: white;
+    font-weight: 300;
+    border-radius: 5px;
+    height: 10%;
+    padding: 1vw;
+    background-color: transparent;
+
+    border: .5vw #ffffff solid;
+
+}
+
+.customAlertContent button{
+    font-family: 'Japandi',sans-serif;
+    text-align: center;
+    font-size: 5vw;
+    color: white;
+    height: 8%;
+    width: 60%;
+    background: rgb(115,3,238);
+    background: linear-gradient(90deg, rgba(115,3,238,1) 0%, rgba(255,0,92,1) 100%);
+    border: none;
+
+}
