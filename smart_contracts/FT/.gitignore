@@ -1,0 +1,7 @@
+.binpath
+.DS_Store
+target/
+.metahash
+*.meta.txt
+meta.txt
+.idea
