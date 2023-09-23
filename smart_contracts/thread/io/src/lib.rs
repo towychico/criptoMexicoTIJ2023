@@ -1,6 +1,6 @@
 #![no_std]
 use gstd::{ActorId, prelude::*};
-use gmeta::{InOut,Metadata};
+use gmeta::{In, InOut, Metadata};
 
 #[derive(Encode, Decode, TypeInfo, PartialEq, Eq, Clone, Debug)]
 pub struct Reply {
@@ -59,7 +59,7 @@ pub enum ThreadEvent {
 pub struct ContractMetadata;
 
 impl Metadata for ContractMetadata {
-    type Init = ();
+    type Init = In<InitThread>;
     type Handle = InOut<ThreadAction,ThreadEvent>;
     type Reply = ();
     type Others = ();
@@ -82,9 +82,9 @@ impl TokensToDistribute {
         }
     }
     pub fn calculate_tokens_to_distribute(&mut self, total_tokens: u128, n_winners_route: u128, n_top: u128) {
-        self.tokens_for_winner = (total_tokens as f64) * 0.4;
-        self.tokens_for_each_winner_route = ((total_tokens as f64) * 0.4) / (n_winners_route as f64);
-        self.tokens_for_each_top = ((total_tokens as f64) * 0.2) / (n_top as f64);
+        // self.tokens_for_winner = (total_tokens as f64) * 0.4;
+        // self.tokens_for_each_winner_route = ((total_tokens as f64) * 0.4) / (n_winners_route as f64);
+        // self.tokens_for_each_top = ((total_tokens as f64) * 0.2) / (n_top as f64);
     }
     pub async fn transfer_tokens(&mut self, winner_id: ActorId, winner_path: Vec<ActorId>, top_posters: Vec<ActorId>) {
         // TODO transfer 40% of distributed tokens to winner ?
@@ -139,7 +139,7 @@ impl Thread {
             amount: 1
         }
          */
-        self.distributed_tokens += 1;
+        // self.distributed_tokens += 1;
     }
     pub fn like_reply(&mut self, post_id: String) {
         // search for reply with that id in replies
@@ -154,6 +154,6 @@ impl Thread {
             amount: 1
         }
          */
-        self.distributed_tokens += 1;
+        // self.distributed_tokens += 1;
     }
 }
